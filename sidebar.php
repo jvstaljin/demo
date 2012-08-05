@@ -1,34 +1,55 @@
 <?php
 /**
- * The Sidebar containing the main widget areas.
+ * The Sidebar containing the primary and secondary widget areas.
  *
- * @package _s
- * @since _s 1.0
+ * @package WordPress
+ * @subpackage Starkers
+ * @since Starkers HTML5 3.0
  */
 ?>
-		<div id="secondary" class="widget-area" role="complementary">
-			<?php do_action( 'before_sidebar' ); ?>
-			<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
-				<aside id="search" class="widget widget_search">
-					<?php get_search_form(); ?>
-				</aside>
+	<aside>
+		<ul>
 
-				<aside id="archives" class="widget">
-					<h1 class="widget-title"><?php _e( 'Archives', '_s' ); ?></h1>
-					<ul>
-						<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
-					</ul>
-				</aside>
+<?php
+	/* When we call the dynamic_sidebar() function, it'll spit out
+	 * the widgets for that widget area. If it instead returns false,
+	 * then the sidebar simply doesn't exist, so we'll hard-code in
+	 * some default sidebar stuff just in case.
+	 */
+	if ( ! dynamic_sidebar( 'primary-widget-area' ) ) : ?>
+	
+			<li>
+				<?php get_search_form(); ?>
+			</li>
 
-				<aside id="meta" class="widget">
-					<h1 class="widget-title"><?php _e( 'Meta', '_s' ); ?></h1>
-					<ul>
-						<?php wp_register(); ?>
-						<li><?php wp_loginout(); ?></li>
-						<?php wp_meta(); ?>
-					</ul>
-				</aside>
+			<li>
+				<h3><?php _e( 'Archives', 'starkers' ); ?></h3>
+				<ul>
+					<?php wp_get_archives( 'type=monthly' ); ?>
+				</ul>
+			</li>
 
-			<?php endif; // end sidebar widget area ?>
-		</div><!-- #secondary .widget-area -->
+			<li>
+				<h3><?php _e( 'Meta', 'starkers' ); ?></h3>
+				<ul>
+					<?php wp_register(); ?>
+					<li><?php wp_loginout(); ?></li>
+					<?php wp_meta(); ?>
+				</ul>
+			</li>
+
+		<?php endif; // end primary widget area ?>
+		</ul>
+
+<?php
+	// A second sidebar for widgets, just because.
+	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
+
+			<ul>
+				<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
+			</ul>
+
+<?php endif; ?>
+	
+	</aside>

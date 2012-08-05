@@ -2,26 +2,37 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the id=main div and all content after
- *
- * @package _s
- * @since _s 1.0
+ * @package WordPress
+ * @subpackage Starkers
+ * @since Starkers HTML5 3.0
  */
 ?>
 
-	</div><!-- #main -->
+	<footer>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<?php do_action( '_s_credits' ); ?>
-			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', '_s' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', '_s' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', '_s' ), '_s', '<a href="http://automattic.com/" rel="designer">Automattic</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- .site-footer .site-footer -->
-</div><!-- #page .hfeed .site -->
+<?php
+	get_sidebar( 'footer' );
+?>
 
-<?php wp_footer(); ?>
+		<a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+			<?php bloginfo( 'name' ); ?>
+		</a>
 
+		<?php do_action( 'starkers_credits' ); ?>
+		
+		<a href="<?php echo esc_url( __('http://wordpress.org/', 'starkers') ); ?>" title="<?php esc_attr_e('Semantic Personal Publishing Platform', 'starkers'); ?>" rel="generator"> 
+			<?php printf( __('Proudly powered by %s.', 'starkers'), 'WordPress' ); ?>
+		</a>
+
+	</footer>
+
+<?php
+	/* Always have wp_footer() just before the closing </body>
+	 * tag of your theme, or you will break many plugins, which
+	 * generally use this hook to reference JavaScript files.
+	 */
+
+	wp_footer();
+?>
 </body>
 </html>

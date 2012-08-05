@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying all single posts.
+ * Template Name: One column, no sidebar
  *
  * @package WordPress
  * @subpackage Starkers
@@ -9,7 +9,6 @@
 
 get_header(); ?>
 
-	<?php get_template_part( 'loop', 'single' ); ?>
+	<?php get_template_part( 'loop', 'page' ); ?>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
